@@ -13,6 +13,9 @@
 		<div class="w-5/6 py-10">
 			@foreach ($books as $book)
 			<div class="m-auto">
+				<div class="">
+					<img src="{{asset('images/'. $book->image_path)}}" class="max-w-full h-48" alt="..." />
+				</div>
 				<span class="uppercase text-blue-500 font-bold text-xs italic">
 					{{ $book->author }}
 				</span>

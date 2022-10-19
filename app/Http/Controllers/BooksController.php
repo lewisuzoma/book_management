@@ -15,7 +15,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $books = Book::orderBy('id', 'DESC')->get();
        return view('books.index',[
             'books' => $books
        ]);
@@ -41,7 +41,7 @@ class BooksController extends Controller
     {
         $request->validationData();
 
-        $newImageName = time() . '-' .$request->image->extension();
+        $newImageName = time() . '-' . $request->title . '.' . $request->image->extension();
 
         $request->image->move(public_path('images'), $newImageName);
 
@@ -93,7 +93,7 @@ class BooksController extends Controller
     public function update(Request $request, $id)
     {
         //$request->validationData();
-        $newImageName = time() . '-' . $request->name . '-' .$request->image->extension();
+        $newImageName = time() . '-' . $request->title . '.' . $request->image->extension();
 
         $request->image->move(public_path('images'), $newImageName);
 

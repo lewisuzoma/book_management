@@ -2,8 +2,11 @@
 
 @section('content')
 	<div class="m-auto w-4/5 py-24">
+		<div class="flex justify-center">
+			<img src="{{asset('images/'. $book->image_path)}}" class="max-w-full h-64" alt="..." />
+		</div>
 		<div class="text-center mb-8">
-			<h1 class="text-5xl uppercase bold">{{ $book->title }}</h1>
+			<h1 class="text-3xl uppercase bold">{{ $book->title }}</h1>
 		</div>
 	
 		<div class="text-center py-10">
