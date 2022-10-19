@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Http\Requests\CreateValidationRequest;
 
 class BooksController extends Controller
 {
@@ -27,7 +28,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -36,9 +37,26 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateValidationRequest $request)
     {
-        //
+        $request->validationData();
+
+        $newImageName = time() . '-' .$request->image->extension();
+
+        $request->image->move(public_path('images'), $newImageName);
+
+        $book = Book::create([
+            'image_path' => $newImageName,
+            'title' => $request->input('title'),
+            'isbn' => $request->input('isbn'),
+            'description' => $request->input('description'),
+            'revision_number' => $request->input('revision_number'),
+            'published_date' => $request->input('published_date'),
+            'publisher' => $request->input('publisher'),
+            'author' => $request->input('author')
+        ]);
+
+        return redirect('/books');
     }
 
     /**
@@ -48,8 +66,9 @@ class BooksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $book = Book::find($id);
+        return view('books.show')->with('book', $book);
     }
 
     /**
@@ -60,7 +79,8 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::find($id)->first();
+        return view('books.edit')->with('book', $book);
     }
 
     /**
@@ -72,7 +92,24 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //$request->validationData();
+        $newImageName = time() . '-' . $request->name . '-' .$request->image->extension();
+
+        $request->image->move(public_path('images'), $newImageName);
+
+        $book = Book::where('id', $id)
+        ->update([
+            'image_path' => $newImageName,
+            'title' => $request->input('title'),
+            'isbn' => $request->input('isbn'),
+            'description' => $request->input('description'),
+            'revision_number' => $request->input('revision_number'),
+            'published_date' => $request->input('published_date'),
+            'publisher' => $request->input('publisher'),
+            'author' => $request->input('author')
+        ]);
+
+        return redirect('/books');
     }
 
     /**
@@ -81,8 +118,12 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Car $car)
     {
-        //
+        //$book = $Book::find($id)->first();
+
+        $book->delete();
+
+        return redirect('/books');
     }
 }

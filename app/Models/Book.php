@@ -14,4 +14,8 @@ class Book extends Model
     protected $primaryKey = 'id';
 
     protected $timestamp = true;
+
+    protected $fillable = ['image_path', 'title', 'isbn', 'description', 'revision_number', 'published_date', 'publisher', 'author'];
+
+    protected $hidden = ['updated_at'];
 }
