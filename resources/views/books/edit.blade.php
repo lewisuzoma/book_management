@@ -24,6 +24,15 @@
 			<div class="block">
 				<input type="file" name="image" class="block shadow-5xl mb-10 p-2 w-80 italic placeholder-grey-400">
 				
+				<select name="genre" class="block shadow-5xl mb-10 p-2 w-80 italic placeholder-grey-400">
+					@if(empty($book->genre_id))
+					<option>--select--</option>
+					@endif
+					@foreach($genres as $genre)
+					<option value="{{$genre->genre_id}}">{{$genre->name}}</option>
+					@endforeach
+				</select>
+				
 				<input type="text" name="title" class="block shadow-5xl mb-10 p-2 w-80 italic placeholder-grey-400" value="{{ $book->title }}">
 
 				<input type="text" name="isbn" class="block shadow-5xl mb-10 p-2 w-80 italic placeholder-grey-400" value="{{ $book->isbn }}">

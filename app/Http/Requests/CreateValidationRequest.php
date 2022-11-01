@@ -30,7 +30,8 @@ class CreateValidationRequest extends FormRequest
             'description' => 'required',
             'published_date' => 'required',
             'publisher' => 'required',
-            'author' => 'required'
+            'author' => 'required',
+            'genre' => 'required'
         ];
     }
 }

@@ -12,7 +12,7 @@
                         <img class="h-auto w-full mx-auto"
                             src="{{ (!empty(Auth::user()->profile_photo)) ? asset('profile_photo/'. Auth::user()->profile_photo) : 'https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg'}}"
                             alt="">
-                        <form class="space-x-6 mb-5" method="POST" enctype="multipart/form-data" action="/profile/photo/{{Auth::user()->users_type_id}}">
+                        <form class="space-x-6 mb-5" method="POST" enctype="multipart/form-data" action="/profile/photo/{{Auth::user()->id}}">
                             @csrf
                             @method('PUT')
                             @if($errors->any())
@@ -43,7 +43,7 @@
                         </form>
                     </div>
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1 text-center">{{ Auth::user()->name }}</h1>
-                    @if(Auth::user()->users_type_id == 1)
+                    @if(Auth::user()->role->name == 'Admin')
                         <h3 class="bg-green-500 py-1 px-2 rounded text-white text-center text-sm">Administrator</h3>
                     @else
                         <h3 class="bg-gray-600 py-1 px-2 rounded text-white text-center text-sm">Reader</h3>
@@ -57,8 +57,8 @@
                         </li>
                         
                         <li class="flex items-center py-3">
-                            <span>Member since</span>
-                            <span class="ml-auto">{{ date('M-d-Y', strtotime(Auth::user()->created_at)) }}</span>
+                            <span>Member since </span>
+                            <span class="ml-auto"> {{ date('M-d-Y', strtotime(Auth::user()->created_at)) }}</span>
                         </li>
                     </ul>
                 </div>

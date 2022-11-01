@@ -8,7 +8,6 @@
 		<div class="text-center mb-8">
 			<h1 class="text-3xl uppercase bold">{{ $book->title }}</h1>
 		</div>
-	
 		<div class="text-center py-10">
 			<div class="m-auto">
 				<span class="uppercase text-blue-500 font-bold text-xs italic px-5">

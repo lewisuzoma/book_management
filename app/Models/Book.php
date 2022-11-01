@@ -9,13 +9,16 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $table = 'books';
+    protected $fillable = ['image_path', 'title', 'isbn', 'description', 'revision_number', 'published_date', 'publisher', 'author', 'user_id', 'genre_id'];
 
-    protected $primaryKey = 'id';
+    public function genre(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Genre::class, 'genre_id');
+    }
 
-    protected $timestamp = true;
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
-    protected $fillable = ['image_path', 'title', 'isbn', 'description', 'revision_number', 'published_date', 'publisher', 'author', 'user_id'];
-
-    protected $hidden = ['updated_at'];
 }

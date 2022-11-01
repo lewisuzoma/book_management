@@ -14,7 +14,7 @@ class CreateBooksTable extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('title');
             $table->string('isbn');
             $table->longText('description');
@@ -22,6 +22,8 @@ class CreateBooksTable extends Migration
             $table->string('published_date');
             $table->string('publisher');
             $table->string('author');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('genre_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

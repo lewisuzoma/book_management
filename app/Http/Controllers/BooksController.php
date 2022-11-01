@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Genre;
 use App\Http\Requests\CreateValidationRequest;
 
 class BooksController extends Controller
@@ -34,7 +35,8 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $genres = Genre::all();
+        return view('books.create')->with('genres', $genres);
     }
 
     /**
@@ -60,6 +62,7 @@ class BooksController extends Controller
             'published_date' => $request->input('published_date'),
             'publisher' => $request->input('publisher'),
             'author' => $request->input('author'),
+            'genre_id' => $request->input('genre'),
             'user_id' => auth()->user()->id
         ]);
 
@@ -87,7 +90,12 @@ class BooksController extends Controller
     public function edit($id)
     {
         $book = Book::find($id)->first();
-        return view('books.edit')->with('book', $book);
+        $genres = Genre::all();
+        //return view('books.edit')->with('book', $book);
+        return view('books.edit', [
+            'book' => $book,
+            'genres' => $genres
+        ]);
     }
 
     /**
@@ -113,7 +121,9 @@ class BooksController extends Controller
             'revision_number' => $request->input('revision_number'),
             'published_date' => $request->input('published_date'),
             'publisher' => $request->input('publisher'),
-            'author' => $request->input('author')
+            'author' => $request->input('author'),
+            'genre_id' => $request->input('genre'),
+            'user_id' => auth()->user()->id
         ]);
 
         return redirect('/books');
@@ -125,7 +135,7 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Car $car)
+    public function destroy(Book $book)
     {
         //$book = $Book::find($id)->first();
 

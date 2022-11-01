@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'users_type_id',
+        'name', 'email', 'password', 'role_id', 'profile_photo',
     ];
 
     /**
@@ -38,8 +38,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function usertype()
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(UserType::class);
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function books(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Book::class);
     }
 }
