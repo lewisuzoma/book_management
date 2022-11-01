@@ -14,31 +14,46 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
-<div class="flex flex-col">
-    @if(Route::has('login'))
-        <div class="absolute top-0 right-0 mt-4 mr-4 space-x-4 sm:mt-6 sm:mr-6 sm:space-x-6">
-            @auth
-                <a href="{{ url('/home') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Home') }}</a>
-            @else
-                <a href="{{ url('books') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Books') }}</a>
-                <a href="{{ route('login') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Login') }}</a>
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Register') }}</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-    <section class="bg-gray-100 dark:bg-gray-900 h-auto mt-10">
-        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-            <div class="mr-auto place-self-center lg:col-span-7">
-                <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Book Library</h1>
-                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec rutrum congue leo eget malesuada.</p>
+    <header class="py-6">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <div>
+                <a href="{{ url('/') }}" class="text-3xl font-extrabold tracking-wide text-gray-900 no-underline hover:text-gray-400">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
             </div>
-            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ asset('images/hero-img.png') }}" alt="hero">
+            
+            <nav class="space-x-300 text-gray-400 text-sm sm:text-base">
+                <ul class="flex">
+                    @guest
+                    <li><a href="{{ url('/') }}" class="text-sm block px-2 py-4"> Home</a></li>
+                    <li><a href="{{ url('/books') }}" class="text-sm block px-2 py-4"> Books</a></li>
+                    <li><a href="{{ route('login') }}" class="text-sm block px-2 py-4"> Login</a></li>
+                    <li><a href="{{ route('register') }}" class="text-sm block px-2 py-4"> Register</a></li>
+                    @endguest
+                    @auth
+                    <li><a href="{{ url('/') }}" class="text-sm block px-2 py-4"> Home</a></li>
+                    <li><a href="{{ url('/books') }}" class="text-sm block px-2 py-4"> Books</a></li>
+                    @endauth
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="bg-gray-100 dark:bg-gray-900 h-auto mt-10">
+        <div class="container flex flex-col-reverse md:flex-row items-center px-6 mx-auto space-y-0 md:space-y-0 md:flex-row">
+            <!-- Left Item -->
+            <div class="flex flex-col mb-32 space-y-12 md:w-1/2">
+                <h3 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Book Library</h3>
+                <p class="max-w-2xl mb-6 font-light text-gray-500 leading-normal tracking-wide lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec rutrum congue leo eget malesuada.</p>
+                <div class="flex justify-center md:justify-start">
+                    <a href="{{ route('register') }}" class="p-3 px-6 pt-2 text-white bg-gray-900 rounded-full baseline hover:bg-gray-500">Get Started</a>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="md:w-1/2 md:flex md:justify-end md:items-start">
+                <img src="{{ asset('images/hero-img.png') }}" alt="hero" class="m-0">
             </div>                
         </div>
     </section>
-</div>
 </body>
 </html>

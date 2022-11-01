@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 
 /*
@@ -17,6 +18,10 @@ use App\Http\Controllers\WelcomeController;
 
 
 Route::resource('/books', BooksController::class);
+
+Route::put('/profile/photo/{profile}', [App\Http\Controllers\ProfileController::class, 'photo']);
+Route::resource('/profile', ProfileController::class);
+
 Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');

@@ -8,6 +8,12 @@ use App\Http\Requests\CreateValidationRequest;
 
 class BooksController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +59,8 @@ class BooksController extends Controller
             'revision_number' => $request->input('revision_number'),
             'published_date' => $request->input('published_date'),
             'publisher' => $request->input('publisher'),
-            'author' => $request->input('author')
+            'author' => $request->input('author'),
+            'user_id' => auth()->user()->id
         ]);
 
         return redirect('/books');

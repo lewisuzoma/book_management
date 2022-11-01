@@ -19391,6 +19391,12 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var btn = document.querySelector("button.mobile-menu-button");
+var menu = document.querySelector(".mobile-menu");
+btn.addEventListener("click", function () {
+  menu.classList.toggle("hidden");
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
