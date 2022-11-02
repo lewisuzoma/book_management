@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -22,8 +23,11 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('profile.home');
+    {   
+        $users = User::where('role_id', '!=', 1)->get();
+        return view('profile.home',[
+            'users' => $users
+        ]);
     }
 
 }

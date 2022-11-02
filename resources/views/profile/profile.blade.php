@@ -10,7 +10,7 @@
                 <div class="bg-white p-3 border-t-4 border-green-400">
                     <div class="image overflow-hidden">
                         <img class="h-auto w-full mx-auto"
-                            src="{{ (!empty(Auth::user()->profile_photo)) ? asset('profile_photo/'. Auth::user()->profile_photo) : 'https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg'}}"
+                            src="{{ (!empty(Auth::user()->profile_photo)) ? asset('profile_photo/'. Auth::user()->profile_photo) : 'https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg' }}"
                             alt="">
                         <form class="space-x-6 mb-5" method="POST" enctype="multipart/form-data" action="/profile/photo/{{Auth::user()->id}}">
                             @csrf
